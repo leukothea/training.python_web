@@ -6,7 +6,7 @@ def client(msg, log_buffer=sys.stderr):
     server_address = ('localhost', 10000)
     # TODO: Replace the following line with your code which will instantiate 
     #       a TCP socket with IPv4 Addressing, call the socket you make 'sock'
-    sock = None
+    sock = socket.socket(2, 1, 6, '', (server_address))
     print >>log_buffer, 'connecting to {0} port {1}'.format(*server_address)
     # TODO: connect your socket to the server here.
 
@@ -15,6 +15,7 @@ def client(msg, log_buffer=sys.stderr):
     try:
         print >>log_buffer, 'sending "{0}"'.format(msg)
         # TODO: send your message to the server here.
+        msg = 'That time of year thou mayst in me behold \nWhen yellow leaves, or none, or few, do hang \nUpon those boughs which shake against the cold, \nBare ruined choirs, where late the sweet birds sang.'
 
         # TODO: the server should be sending you back your message as a series
         #       of 16-byte chunks.  You will want to log them as you receive 
