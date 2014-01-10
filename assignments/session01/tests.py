@@ -97,7 +97,7 @@ class EchoTestCase(unittest.TestCase):
 
     def test_long_message_echo(self):
         """test that a message longer than 16 bytes echoes in 16-byte chunks"""
-        long_message = "Four score and seven years ago our fathers did stuff"
+        long_message = "That time of year thou mayst in me behold When yellow leaves, or none, or few, do hang Upon those boughs which shake against the cold, Bare ruined choirs, where late the sweet birds sang."
         self.send_message(long_message)
         actual_sent, actual_reply = self.process_log()
 
