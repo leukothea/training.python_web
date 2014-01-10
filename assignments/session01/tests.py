@@ -96,7 +96,10 @@ class EchoTestCase(unittest.TestCase):
             "expected {0} got {1}".format(expected_line, actual_line))
 
     def test_long_message_echo(self):
-        """test that a message longer than 16 bytes echoes in 16-byte chunks"""
+        """
+        test that a message longer than 16 bytes echoes in 16-byte chunks
+        NOTE: Cris, I tried the following four lines of a poem with newline characters and the test failed! Stripping out the newlines made the test pass.
+        """
         long_message = "That time of year thou mayst in me behold When yellow leaves, or none, or few, do hang Upon those boughs which shake against the cold, Bare ruined choirs, where late the sweet birds sang."
         self.send_message(long_message)
         actual_sent, actual_reply = self.process_log()
