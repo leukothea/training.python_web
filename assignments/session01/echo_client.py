@@ -7,7 +7,7 @@ def client(msg, log_buffer=sys.stderr):
 
     # TODO: Replace the following line with your code which will instantiate 
     #       a TCP socket with IPv4 Addressing, call the socket you make 'sock'
-    sock = socket.socket(2, 1, 6, '', (server_address))
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
 
     print >>log_buffer, 'connecting to {0} port {1}'.format(*server_address)
 
