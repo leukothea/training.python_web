@@ -1,8 +1,8 @@
 import os
 import tempfile
 import unittest
-import microblog
 
+import microblog
 
 class MicroblogTestCase(unittest.TestCase):
 
@@ -19,10 +19,10 @@ class MicroblogTestCase(unittest.TestCase):
         os.unlink(microblog.app.config['DATABASE'])
 
     def test_database_setup(self):
-        con = microblog.connect_db()
-        cur = con.execute('PRAGMA table_info(entries);')
-        rows = cur.fetchall()
-        self.assertEquals(len(rows), 3)
+    	con = microblog.connect_db()
+    	cur = con.execute('PRAGMA table_info(entries);')
+    	rows = cur.fetchall()
+    	self.assertEquals(len(rows), 3)
 
     def test_write_entry(self):
         expected = ("My Title", "My Text")
@@ -64,6 +64,8 @@ class MicroblogTestCase(unittest.TestCase):
             self.assertTrue(value in actual)
 
     def test_add_entries(self):
+        with self.client.session_transaction() as session:
+            session['logged_in'] = True
         actual = self.client.post('/add', data=dict(
             title='Hello',
             text='This is a post'
@@ -72,6 +74,17 @@ class MicroblogTestCase(unittest.TestCase):
         self.assertTrue('Hello' in actual)
         self.assertTrue('This is a post' in actual)
 
+    def test_login(self):
+        actual = self.client.post('/login', data=dict(username='user0', password='notapassword'), follow_redirects=True)
+        self.assertTrue('You are logged in' in actual.data)
+
+    def test_logout(self):
+        actual = self.client.get('/logout', follow_redirects=True)
+        self.assertTrue('You have logged out' in actual.data)
+
+    def test_login_incorrect(self):
+        actual = self.client.post('/login', data=dict(username='Voldemort', password='HarryMustDie'), follow_redirects=True)
+        self.assertTrue('Invalid username' in actual.data)
 
 if __name__ == '__main__':
     unittest.main()
