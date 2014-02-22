@@ -74,7 +74,7 @@ One of you will start as the driver, the other as the observer.
 
 .. class:: incremental
 
-About every 20 minutes, we will switch, so that each of you can take a turn
+About every 20-30 minutes, we will switch, so that each of you can take a turn
 driving.
 
 
@@ -83,17 +83,97 @@ Preparation
 
 In order for this to work properly, we'll need to have a few things in place.
 
-.. container:: incremental
+.. container:: incremental small
 
-    First, you'll all need to make sure that you have the very latest code from the
-    class repository available on your local machine::
+    First, we'll start from a canonical copy of the microblog.  Make a fork of
+    the following repository to your github account:
 
-        $ git add remote uwpce git@github.com:UWPCE-PythonCert/training.python_web.git
+    .. code-block::
+        :class: small
 
-.. container:: incremental
+        https://github.com/UWPCE-PythonCert/training.sample-flask-app
 
-    First, you both will need to make a branch of the class repository that you
-    can work on::
+.. container:: incremental small
 
-        $ git checkout -b session06-class
+    Then, clone that repository to your local machine:
+
+    .. code-block:: bash
+        :class: small
+
+        $ git clone https://github.com/<your_name>/training.sample-flask-app.git
+        or
+        $ git clone git@github.com:<your_name>/training.sample-flask-app.git
+
+Connect to Your Partner
+-----------------------
+
+Finally, you'll want to connect to your partner's repository, so that you can
+each work on your own laptop and still share the changes you make.
+
+.. container:: incremental small
+
+    First, add your partner's repository as ``upstream`` to yours:
+
+    .. code-block:: bash
+        :class: small
+
+        $ git remote add upstream https://github.com/<partner>/training.sample-flask-app.git
+        or
+        $ git remote add upstream git@github.com:<partner>/training.sample-flask-app.git
+
+.. container:: incremental small
+
+    Then, fetch their copy so that you can easily merge their changes later:
+
+    .. code-block:: bash
+        :class: small
+
+        $ git fetch upstream
+
+While You Work
+--------------
+
+.. class:: small
+
+Now, when you switch roles during your work, here's the workflow you can use:
+
+.. class:: small
+
+1. The current driver commits all changes and pushes to their repository:
+
+.. code-block:: bash
+    :class: small
+
+    $ git commit -a -m "Time to switch roles"
+    $ git push origin master
+
+.. class:: small
+
+2. The new driver fetches and merges changes made upstream:
+
+.. code-block:: bash
+    :class: small
+
+    $ git fetch upstream master
+    $ git branch -a
+    * master
+      remotes/origin/master
+      remotes/upstream/master
+    $ git merge upstream/master
+
+.. class:: small
+
+3. The new driver continues working from where their partner left off.
+
+
+Homework
+--------
+
+For this week, please read and complete the Introduction to Django tutorial
+linked from the class website and from the course outline.
+
+You will be expected to have successfully completed that tutorial upon arrival
+in class for our next session.
+
+We will begin our work starting from where it leaves off.
 
