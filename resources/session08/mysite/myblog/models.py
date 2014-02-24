@@ -31,6 +31,11 @@ class Category(models.Model):
         related_name='categories'
     )
 
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+        ordering = ('name', )
+
     def __unicode__(self):
         return self.name
 
